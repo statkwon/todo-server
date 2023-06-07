@@ -1,0 +1,14 @@
+package com.sds.todoserver.exception;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler
+    public ResponseEntity handleIllegalExceptionHandler(IllegalArgumentException e) {
+        return ResponseEntity.badRequest().build();
+    }
+}
