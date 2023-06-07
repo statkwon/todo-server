@@ -22,4 +22,9 @@ public class TaskController {
         taskService.create(request.getContent());
         return taskService.findAll();
     }
+
+    @GetMapping
+    public List<Task> list() {
+        return taskService.findAll();
+    }
 }
