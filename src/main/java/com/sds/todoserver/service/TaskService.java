@@ -4,8 +4,10 @@ import com.sds.todoserver.domain.Task;
 import com.sds.todoserver.repository.TaskRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +21,19 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
+    public Optional<Task> findById(Long id) {
+        return taskRepository.findById(id);
+    }
+
     public List<Task> findAll() {
         return taskRepository.findAll();
+    }
+
+    @Transactional
+    public Task update(Long id, String content, Boolean isDone) {
+        Task task = taskRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        task.setContent(content);
+        task.setIsDone(isDone);
+        return taskRepository.save(task);
     }
 }

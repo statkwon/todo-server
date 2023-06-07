@@ -1,6 +1,7 @@
 package com.sds.todoserver.controller;
 
 import com.sds.todoserver.controller.dto.TaskCreateRequest;
+import com.sds.todoserver.controller.dto.TaskUpdateRequest;
 import com.sds.todoserver.domain.Task;
 import com.sds.todoserver.service.TaskService;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,12 @@ public class TaskController {
 
     @GetMapping
     public List<Task> list() {
+        return taskService.findAll();
+    }
+
+    @PatchMapping
+    public List<Task> update(@RequestBody TaskUpdateRequest request) {
+        taskService.update(request.getId(), request.getContent(), request.getIsDone());
         return taskService.findAll();
     }
 }
