@@ -36,14 +36,12 @@ public class TaskController {
     }
 
     @DeleteMapping(value = "/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public List<Task> delete(@PathVariable(name = "id") Long id) {
         taskService.delete(id);
         return taskService.findAll();
     }
 
     @DeleteMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public List<Task> deleteAll() {
         taskService.deleteAll();
         return taskService.findAll();
